@@ -83,6 +83,8 @@ $app->singleton(\Illuminate\Foundation\Console\KeyGenerateCommand::class, functi
 |
 */
 
+$app->register(Illuminate\Database\DatabaseServiceProvider::class);
+$app->register(Illuminate\Database\MigrationServiceProvider::class);
 $app->register(App\Providers\ArtisanServiceProvider::class);
 
 /*
