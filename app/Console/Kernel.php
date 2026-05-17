@@ -20,8 +20,12 @@ class Kernel extends ConsoleKernel
      */
     protected function commands(): void
     {
+        // Load application commands
         $this->load(__DIR__.'/Commands');
 
         require base_path('routes/console.php');
+        
+        // Register Laravel's built-in commands
+        // This will be done through the ArtisanStarting event or service provider if needed
     }
 }

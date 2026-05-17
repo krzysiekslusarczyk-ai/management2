@@ -43,6 +43,50 @@ $app->singleton(
 
 /*
 |--------------------------------------------------------------------------
+| Register File System Service
+|--------------------------------------------------------------------------
+|
+| Register the files service which is used for filesystem operations
+| throughout the application.
+|
+*/
+
+$app->singleton('files', function () {
+    return new Illuminate\Filesystem\Filesystem();
+});
+
+$app->singleton('composer', function ($app) {
+    return new Illuminate\Support\Composer($app['files']);
+});
+
+/*
+|--------------------------------------------------------------------------
+| Register The Command Loader
+|--------------------------------------------------------------------------
+|
+| We'll register the command loader which loads commands from the
+| application's console commands directory and external command files.
+|
+*/
+
+// Register key:generate command directly
+$app->singleton(\Illuminate\Foundation\Console\KeyGenerateCommand::class, function ($app) {
+    return new \Illuminate\Foundation\Console\KeyGenerateCommand();
+});
+
+/*
+|--------------------------------------------------------------------------
+| Service Provider Registration
+|--------------------------------------------------------------------------
+|
+| Register the service providers for the application.
+|
+*/
+
+$app->register(App\Providers\ArtisanServiceProvider::class);
+
+/*
+|--------------------------------------------------------------------------
 | Return The Application
 |--------------------------------------------------------------------------
 |
