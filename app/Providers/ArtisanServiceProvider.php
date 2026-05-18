@@ -14,6 +14,7 @@ use Illuminate\Database\Console\Migrations\RollbackCommand;
 use Illuminate\Database\Console\Migrations\StatusCommand;
 use Illuminate\Database\Console\Seeds\SeedCommand;
 use Illuminate\Database\Console\Migrations\MigrateMakeCommand;
+use Illuminate\Console\Signals;
 
 class ArtisanServiceProvider extends ServiceProvider
 {
@@ -45,6 +46,11 @@ class ArtisanServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        // Initialize the signals availability resolver for artisan commands
+        Signals::resolveAvailabilityUsing(function () {
+            return $this->app->runningInConsole()
+                && ! $this->app->runningUnitTests()
+                && extension_loaded('pcntl');
+        });
     }
 }
