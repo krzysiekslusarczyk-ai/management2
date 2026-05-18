@@ -6,15 +6,6 @@ return [
     'app_debug' => env('APP_DEBUG', false),
     'app_url' => env('APP_URL', 'http://localhost'),
 
-    'database' => [
-        'driver' => env('DB_CONNECTION', 'mysql'),
-        'host' => env('DB_HOST', '127.0.0.1'),
-        'port' => env('DB_PORT', 3306),
-        'database' => env('DB_DATABASE', 'task_management'),
-        'username' => env('DB_USERNAME', 'root'),
-        'password' => env('DB_PASSWORD', ''),
-    ],
-
     'jwt' => [
         'secret' => env('JWT_SECRET', 'your-secret-key'),
         'algorithm' => 'HS256',
