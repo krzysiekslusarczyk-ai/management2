@@ -43,6 +43,21 @@ $app->singleton(
 
 /*
 |--------------------------------------------------------------------------
+| Register Maintenance Mode Service
+|--------------------------------------------------------------------------
+|
+| Register the maintenance mode service which handles application
+| maintenance mode checks and responses.
+|
+*/
+
+$app->singleton(
+    Illuminate\Contracts\Foundation\MaintenanceMode::class,
+    Illuminate\Foundation\MaintenanceMode\FileBasedMaintenanceMode::class
+);
+
+/*
+|--------------------------------------------------------------------------
 | Register File System Service
 |--------------------------------------------------------------------------
 |
