@@ -70,6 +70,7 @@ $app->singleton('composer', function ($app) {
 
 $app->singleton('config', function () {
     return new Illuminate\Config\Repository([
+        'app' => require __DIR__ . '/../config/app.php',
         'view' => require __DIR__ . '/../config/view.php',
     ]);
 });

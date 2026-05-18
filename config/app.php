@@ -1,10 +1,10 @@
 <?php
 
 return [
-    'app_name' => env('APP_NAME', 'Task Management'),
-    'app_env' => env('APP_ENV', 'production'),
-    'app_debug' => env('APP_DEBUG', false),
-    'app_url' => env('APP_URL', 'http://localhost'),
+    'name' => env('APP_NAME', 'Task Management'),
+    'env' => env('APP_ENV', 'production'),
+    'debug' => env('APP_DEBUG', false),
+    'url' => env('APP_URL', 'http://localhost'),
 
     'jwt' => [
         'secret' => env('JWT_SECRET', 'your-secret-key'),
