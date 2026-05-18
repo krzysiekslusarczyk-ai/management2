@@ -61,6 +61,54 @@ $app->singleton('composer', function ($app) {
 
 /*
 |--------------------------------------------------------------------------
+| Register Configuration Service
+|--------------------------------------------------------------------------
+|
+| Register the configuration repository for loading configuration files.
+|
+*/
+
+$app->singleton('config', function () {
+    return new Illuminate\Config\Repository([
+        'view' => require __DIR__ . '/../config/view.php',
+    ]);
+});
+
+/*
+|--------------------------------------------------------------------------
+| Register Event Dispatcher Service
+|--------------------------------------------------------------------------
+|
+| Register the event dispatcher for handling events throughout the app.
+|
+*/
+
+$app->singleton('events', function ($app) {
+    return new Illuminate\Events\Dispatcher($app);
+});
+
+/*
+|--------------------------------------------------------------------------
+| Register Translator Service
+|--------------------------------------------------------------------------
+|
+| Register the translator for localization support.
+|
+*/
+
+$app->singleton('translator', function ($app) {
+    $loader = new Illuminate\Translation\FileLoader(
+        $app['files'],
+        resource_path('lang')
+    );
+    
+    $locale = 'en';
+    
+    return new Illuminate\Translation\Translator($loader, $locale);
+});
+
+/*
+|--------------------------------------------------------------------------
 | Register The Command Loader
 |--------------------------------------------------------------------------
 |
@@ -85,6 +133,8 @@ $app->singleton(\Illuminate\Foundation\Console\KeyGenerateCommand::class, functi
 
 $app->register(Illuminate\Database\DatabaseServiceProvider::class);
 $app->register(Illuminate\Database\MigrationServiceProvider::class);
+$app->register(Illuminate\Events\EventServiceProvider::class);
+$app->register(Illuminate\View\ViewServiceProvider::class);
 $app->register(App\Providers\ArtisanServiceProvider::class);
 
 /*
