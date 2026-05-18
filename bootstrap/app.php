@@ -150,8 +150,26 @@ $app->singleton(\Illuminate\Foundation\Console\KeyGenerateCommand::class, functi
 $app->register(Illuminate\Database\DatabaseServiceProvider::class);
 $app->register(Illuminate\Database\MigrationServiceProvider::class);
 $app->register(Illuminate\Events\EventServiceProvider::class);
+$app->register(Illuminate\Routing\RoutingServiceProvider::class);
 $app->register(Illuminate\View\ViewServiceProvider::class);
 $app->register(App\Providers\ArtisanServiceProvider::class);
+
+/*
+|--------------------------------------------------------------------------
+| Route Registration
+|--------------------------------------------------------------------------
+|
+| Register application routes for web and API endpoints.
+|
+*/
+
+if (file_exists($webRoutes = $app->basePath('routes/web.php'))) {
+    $app['router']->middleware('web')->group($webRoutes);
+}
+
+if (file_exists($apiRoutes = $app->basePath('routes/api.php'))) {
+    $app['router']->prefix('api')->middleware('api')->group($apiRoutes);
+}
 
 /*
 |--------------------------------------------------------------------------
