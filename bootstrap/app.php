@@ -53,7 +53,7 @@ $app->singleton(
 
 $app->singleton(
     Illuminate\Contracts\Foundation\MaintenanceMode::class,
-    Illuminate\Foundation\MaintenanceMode\FileBasedMaintenanceMode::class
+    Illuminate\Foundation\MaintenanceMode::class
 );
 
 /*
